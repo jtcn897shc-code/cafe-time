@@ -158,6 +158,7 @@ h1,h2,h3{
 .hero-scroll{
   position: relative;
   height: 340vh;
+  padding: 0;
   background: var(--ink);
 }
 .hero-sticky{
@@ -177,7 +178,7 @@ h1,h2,h3{
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 35%;
 }
 @media (max-width: 767px){
   /* the drink sits around 60-80% across the frame; keep it in view on narrow screens */
@@ -222,14 +223,17 @@ h1,h2,h3{
 .hero-band{
   position:absolute;
   left:0; right:0; bottom: 0;
+  max-width: 52vw;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .5s var(--ease), transform .5s var(--ease);
 }
+@media (max-width: 767px){ .hero-band{ max-width: none; } }
 .hero-band.active{ opacity:1; transform: translateY(0); }
 .hero-band .eyebrow{ color: var(--matcha); }
 .hero-band h1{
-  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  font-size: clamp(2.5rem, 5.2vw, 5.5rem);
+  line-height: 1.05;
   color: var(--cream);
 }
 .hero-band p.sub{
@@ -242,7 +246,8 @@ h1,h2,h3{
 
 .hero-settle{ display:flex; flex-direction:column; gap:22px; }
 .hero-settle .word{
-  font-size: clamp(3rem, 12vw, 7rem);
+  font-size: clamp(2.6rem, 6.4vw, 6.2rem);
+  line-height: 1.02;
   color: var(--cream);
 }
 .hero-settle .word .t2{ color: var(--matcha); }
