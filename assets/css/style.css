@@ -1,4 +1,4 @@
-/* Cafe Time — bold & modern, one-page site */
+/* Cafe Time: bold and modern, one-page site */
 
 :root{
   --ink:#121412;
@@ -179,10 +179,19 @@ h1,h2,h3{
   object-fit: cover;
   object-position: center 40%;
 }
+@media (max-width: 767px){
+  /* the drink sits around 60-80% across the frame; keep it in view on narrow screens */
+  .hero-media video, .hero-media img{ object-position: 72% center; }
+}
 .hero-media::after{
   content:"";
   position:absolute; inset:0;
   background: linear-gradient(180deg, rgba(18,20,18,0.55) 0%, rgba(18,20,18,0.15) 30%, rgba(18,20,18,0.15) 55%, rgba(18,20,18,0.75) 100%);
+}
+@media (max-width: 767px){
+  .hero-media::after{
+    background: linear-gradient(180deg, rgba(18,20,18,0.35) 0%, rgba(18,20,18,0.25) 38%, rgba(18,20,18,0.82) 62%, rgba(18,20,18,0.94) 100%);
+  }
 }
 .hero-loading{
   position:absolute; inset:0;
@@ -253,6 +262,10 @@ h1,h2,h3{
   font-family:'JetBrains Mono'; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   display:flex; flex-direction:column; align-items:center; gap:8px;
 }
+@media (max-width: 767px){
+  /* the settle headline runs long on narrow screens; keep the cue from overlapping it */
+  .scroll-cue{ display:none; }
+}
 .scroll-cue .line{ width:1px; height:30px; background: currentColor; overflow:hidden; }
 .scroll-cue .line::after{ content:""; display:block; width:100%; height:100%; background:var(--matcha); transform: translateY(-100%); animation: cue 1.8s var(--ease) infinite; }
 @keyframes cue{ 0%{ transform: translateY(-100%);} 50%{ transform: translateY(0);} 100%{ transform: translateY(100%);} }
@@ -260,10 +273,10 @@ h1,h2,h3{
 /* ---------- signature ring (SVG draw-on-scroll) ---------- */
 .signature-ring{
   position: fixed;
-  right: 18px;
+  right: max(16px, env(safe-area-inset-right));
   top: 50%;
   transform: translateY(-50%);
-  width: 64px; height: 64px;
+  width: 56px; height: 56px;
   z-index: 40;
   pointer-events:none;
   opacity: 0;
@@ -275,7 +288,9 @@ h1,h2,h3{
 .signature-ring circle.progress{ fill:none; stroke: var(--green); stroke-width:2; stroke-linecap:round; transform-origin:50% 50%; transform:rotate(-90deg); }
 .signature-ring .hand{ stroke: var(--tangerine); stroke-width:2.5; stroke-linecap:round; transform-origin:32px 32px; }
 .signature-ring .label{ font-family:'JetBrains Mono'; font-size:8px; fill: var(--ink); text-anchor:middle; }
-@media (max-width: 900px){ .signature-ring{ display:none; } }
+/* keep well clear of section content at laptop widths; hidden entirely below 768 */
+@media (max-width: 1100px){ .signature-ring{ right: 10px; width: 48px; height: 48px; } }
+@media (max-width: 768px){ .signature-ring{ display:none; } }
 
 /* ---------- sections ---------- */
 section{ position:relative; padding: 88px 0; }
