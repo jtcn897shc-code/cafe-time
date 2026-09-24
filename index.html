@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafe Time | Abbotsford Cafe, Breakfast, Lunch & Coffee</title>
+<meta name="description" content="Cafe Time on South Fraser Way in Abbotsford. Organic coffee, organic tea, and sandwiches made fresh daily. Order online and earn rewards.">
+<link rel="icon" href="assets/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Instrument+Serif:ital@1&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="env-layer" aria-hidden="true"><canvas></canvas></div>
+<div class="signature-ring" aria-hidden="true">
+  <svg viewBox="0 0 64 64">
+    <circle class="track" cx="32" cy="32" r="28"></circle>
+    <circle class="progress" cx="32" cy="32" r="28"></circle>
+    <line class="hand" x1="32" y1="32" x2="32" y2="14"></line>
+    <circle cx="32" cy="32" r="2.5" fill="#FF5A1F"></circle>
+  </svg>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.webp" alt="Cafe Time logo">
+    </a>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#visit">Visit</a>
+      <a href="#rewards">Rewards</a>
+      <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M0 1H18M0 6H18M0 11H18" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="#menu">Menu</a>
+  <a href="#visit">Visit</a>
+  <a href="#rewards">Rewards</a>
+  <a href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero-scroll" data-hour="7" aria-label="Cafe Time hero">
+    <div class="hero-sticky">
+      <div class="hero-media">
+        <!-- video (if assets/hero.mp4 exists) or static fallback is injected here by JS -->
+      </div>
+      <div class="hero-loading"><div class="ring"></div></div>
+
+      <div class="hero-content">
+        <div class="wrap">
+          <div class="hero-band active" data-start="0" data-end="0.34">
+            <span class="eyebrow">Time for matcha</span>
+            <h1>Time for something green.</h1>
+          </div>
+          <div class="hero-band" data-start="0.34" data-end="0.68">
+            <span class="eyebrow">Whisked, not shaken</span>
+            <h1>Whisked fresh.<br>Poured over ice.</h1>
+            <p class="sub">your matcha, your hour.</p>
+          </div>
+          <div class="hero-band settle" data-start="0.68" data-end="1.01">
+            <div class="hero-settle">
+              <h1 class="word">CAFE <span class="t2">TIME</span></h1>
+              <p class="sub">Breakfast, lunch and coffee on South Fraser Way.</p>
+              <div class="hero-stats">
+                <span class="chip">Organic coffee</span>
+                <span class="chip">Fresh daily</span>
+                <span class="chip">Local bread</span>
+              </div>
+              <div class="cta-row">
+                <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
+                <a class="btn ghost" href="#menu">See the menu</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <!-- YOUR DAY, ON TIME -->
+  <section id="day" data-hour="9">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">A cafe for every hour</span>
+        <h2>Your day, on time.</h2>
+        <p class="lede">Three moments. One good cup each.</p>
+      </div>
+      <div class="day-grid stagger">
+        <article class="day-card reveal" style="--i:0">
+          <div class="img"><img src="assets/img/food-coffee.jpg" alt="Latte with heart-shaped latte art at Cafe Time"></div>
+          <div class="body">
+            <span class="time">7AM</span>
+            <h3>Morning coffee</h3>
+            <p>Organic beans, pulled right. The kind of cup that makes the whole morning easier.</p>
+            <div><span class="chip">Agro Roasters</span><span class="chip">Organic</span></div>
+          </div>
+        </article>
+        <article class="day-card reveal" style="--i:1">
+          <div class="img"><img src="assets/img/food-sandwich.jpg" alt="Pressed sandwich with pepperoncini at Cafe Time"></div>
+          <div class="body">
+            <span class="time">12PM</span>
+            <h3>Lunch</h3>
+            <p>Sandwiches built fresh every morning on real bread, with whatever's local that week.</p>
+            <div><span class="chip">Cobs Bread</span><span class="chip">Made fresh daily</span></div>
+          </div>
+        </article>
+        <article class="day-card reveal" style="--i:2">
+          <div class="img"><img src="assets/img/food-cake.jpg" alt="Sliced cakes on a tray at Cafe Time"></div>
+          <div class="body">
+            <span class="time">3PM</span>
+            <h3>Afternoon treat</h3>
+            <p>A slice, a slow sip, a seat by the window. Nobody's rushing you out.</p>
+            <div><span class="chip">Cozy space</span><span class="chip">Good light</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU GRID -->
+  <section id="menu" class="menu-section" data-hour="12">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The spread</span>
+        <h2>Everything, at a glance.</h2>
+        <p class="lede">The full menu and every swap live in ordering. Here's what's coming out of the kitchen.</p>
+      </div>
+      <div class="menu-grid stagger">
+        <div class="menu-card reveal" style="--i:0"><span class="num">01</span><img src="assets/img/food-coffee.jpg" alt="Coffee"><div class="label"><div class="name">Coffee</div><div class="line">Smooth, rich, pulled by people who care about it.</div></div></div>
+        <div class="menu-card reveal" style="--i:1"><span class="num">02</span><img src="assets/img/food-hottea.jpg" alt="Hot tea"><div class="label"><div class="name">Hot tea</div><div class="line">Organic leaves, steeped properly, jar by jar.</div></div></div>
+        <div class="menu-card reveal" style="--i:2"><span class="num">03</span><img src="assets/img/food-sandwich.jpg" alt="Sandwich"><div class="label"><div class="name">Sandwich</div><div class="line">Pressed hot, stacked full, gone in minutes.</div></div></div>
+        <div class="menu-card reveal" style="--i:3"><span class="num">04</span><img src="assets/img/food-salad.jpg" alt="Salad"><div class="label"><div class="name">Salad</div><div class="line">Crisp and colorful, built to actually fill you up.</div></div></div>
+        <div class="menu-card reveal" style="--i:4"><span class="num">05</span><img src="assets/img/food-colddrinks.jpg" alt="Cold drinks"><div class="label"><div class="name">Cold drinks</div><div class="line">Iced, fruited, the reason summer regulars exist.</div></div></div>
+        <div class="menu-card reveal" style="--i:5"><span class="num">06</span><img src="assets/img/food-rice.jpg" alt="Rice bowl"><div class="label"><div class="name">Rice</div><div class="line">A warm bowl when a sandwich isn't enough.</div></div></div>
+        <div class="menu-card reveal" style="--i:6"><span class="num">07</span><img src="assets/img/food-cake.jpg" alt="Cake"><div class="label"><div class="name">Cake</div><div class="line">Small slices, big finish.</div></div></div>
+        <div class="menu-card reveal" style="--i:7"><span class="num">08</span><img src="assets/img/food-soup.jpg" alt="Soup"><div class="label"><div class="name">Soup</div><div class="line">The bowl people order twice in one week.</div></div></div>
+      </div>
+      <div class="menu-cta reveal">
+        <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">See full menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCING STRIP -->
+  <section class="sourcing" data-hour="10">
+    <div class="wrap">
+      <div class="sourcing-grid">
+        <div>
+          <div class="section-head reveal" style="margin-bottom:26px;">
+            <span class="eyebrow">Where it comes from</span>
+            <h2>We didn't cut corners on where this comes from.</h2>
+          </div>
+          <div class="sourcing-list stagger">
+            <div class="sourcing-item reveal" style="--i:0">
+              <span class="dot"></span>
+              <div><h3>Agro Roasters</h3><p>Organic coffee, roasted with care, not shortcuts.</p></div>
+            </div>
+            <div class="sourcing-item reveal" style="--i:1">
+              <span class="dot"></span>
+              <div><h3>Tego</h3><p>Organic tea, the kind that tastes like it was picked on purpose.</p></div>
+            </div>
+            <div class="sourcing-item reveal" style="--i:2">
+              <span class="dot"></span>
+              <div><h3>Cobs Bread</h3><p>Baked bread, sliced fresh, holding every sandwich together.</p></div>
+            </div>
+          </div>
+          <p class="sourcing-close reveal">Local names. Real ingredients. Nothing here is generic.</p>
+        </div>
+        <div class="sourcing-photo reveal">
+          <img src="assets/img/interior.jpg" alt="Inside Cafe Time, natural light and wood tables">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REWARDS -->
+  <section id="rewards" class="rewards" data-hour="14">
+    <div class="wrap">
+      <div class="rewards-row reveal">
+        <div>
+          <span class="eyebrow">Loyalty, built in</span>
+          <h2>Earn points every order.</h2>
+          <p>Order online and every cup and every sandwich earns you rewards toward the next one. No card to carry, no app to dig through, it's already in your account.</p>
+        </div>
+        <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online and start earning</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CLOCK PICKER -->
+  <section class="picker" data-hour="15">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Pick your hour</span>
+        <h2>Drag the hand. We'll tell you what to order.</h2>
+        <p class="lede">Every hour of the day has a drink and a bite that fits it.</p>
+      </div>
+      <div class="picker-wrap reveal">
+        <div class="clock" role="slider" aria-label="Drag to pick a time of day" aria-valuemin="7" aria-valuemax="19">
+          <div class="hand"></div>
+          <div class="center-dot"></div>
+        </div>
+        <div class="picker-result">
+          <div class="hour-readout">7-10AM</div>
+          <h3>Morning coffee + a fresh sandwich.</h3>
+          <p>Start the day the way regulars do.</p>
+          <p class="foot">Whatever the hour, order online and it'll be ready.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit" class="visit" data-hour="16">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Find us</span>
+        <h2>Come sit with us.</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card reveal">
+          <span class="eyebrow" style="margin-bottom:2px;">Address</span>
+          <div class="addr">#102 - 32315 South Fraser Way<br>Abbotsford, BC</div>
+          <!-- TODO hours -->
+          <div class="hours-note">Hours: see online ordering.</div>
+          <p class="desc">Natural light, comfortable tables, and a space that's actually easy to unwind in with family and friends.</p>
+          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Cafe+Time+102-32315+South+Fraser+Way+Abbotsford+BC" target="_blank" rel="noopener">Get directions</a>
+        </div>
+        <div class="map-card reveal">
+          <div class="grid-lines"></div>
+          <span class="pin"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" data-hour="17">
+    <div class="wrap reveal">
+      <h2>Your table's ready.</h2>
+      <p>Order online, earn rewards, and we'll have it ready when you walk in.</p>
+      <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="brand" href="#top"><img src="assets/img/logo.webp" alt="Cafe Time logo" style="height:30px;"></a>
+      <nav class="footer-nav">
+        <a href="#menu">Menu</a>
+        <a href="#visit">Visit</a>
+        <a href="#rewards">Rewards</a>
+        <a href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
+      </nav>
+    </div>
+    <div class="footer-disclosure">
+      Hero imagery is AI generated. Food photos are from our kitchen.<br>
+      Cafe Time, #102 - 32315 South Fraser Way, Abbotsford, BC.
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
