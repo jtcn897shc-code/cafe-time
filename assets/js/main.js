@@ -180,6 +180,14 @@
         video.src = url;
         mediaWrap.appendChild(video);
 
+        video.addEventListener('error', function(){
+          // decode failed on this browser/build even though the fetch succeeded
+          video.remove();
+          staticFallback();
+          window.addEventListener('scroll', showBandsByScroll, { passive:true });
+          showBandsByScroll();
+        });
+
         var seeking = false;
         var targetTime = 0;
         var duration = 0;
@@ -225,24 +233,37 @@
     var title = document.querySelector('.picker-result h3');
     var desc = document.querySelector('.picker-result p');
 
+    var OPEN = 7.5, CLOSE = 16.5;
     var pairings = [
-      { from: 7, to: 10, hour: '7-10AM', title: 'Morning coffee + a fresh sandwich.', desc: 'Start the day the way regulars do.' },
-      { from: 10, to: 13, hour: '10-1PM', title: 'Iced matcha + a salad.', desc: 'Bright, cold, and enough to carry you to lunch.' },
-      { from: 13, to: 16, hour: '1-4PM', title: 'Hot tea + a slice of cake.', desc: 'The slow-down hour. Take the window seat.' },
-      { from: 16, to: 19, hour: '4-7PM', title: 'Cold drink + a bowl of soup.', desc: 'Warm inside, cool in hand. Perfect trade.' }
+      { from: 7.5, to: 9.5, hour: '7:30-9:30AM', title: 'Morning coffee + a fresh sandwich.', desc: 'Start the day the way regulars do.' },
+      { from: 9.5, to: 11.5, hour: '9:30-11:30AM', title: 'Iced matcha + a salad.', desc: 'Bright, cold, and enough to carry you to lunch.' },
+      { from: 11.5, to: 14, hour: '11:30-2PM', title: 'Hot tea + a bowl of soup.', desc: 'The slow-down hour. Take the window seat.' },
+      { from: 14, to: 16.5, hour: '2-4:30PM', title: 'Cold drink + a slice of cake.', desc: 'Warm inside, cool in hand. Perfect trade.' }
     ];
 
     function pairingFor(hour){
       for(var i=0;i<pairings.length;i++){
         if(hour >= pairings[i].from && hour < pairings[i].to) return pairings[i];
       }
-      return pairings[0];
+      return pairings[pairings.length - 1];
     }
 
     function setHour(hour){
       hour = Math.max(7, Math.min(18.99, hour));
       var deg = ((hour - 7) / 12) * 360;
       hand.style.transform = 'translateX(-50%) rotate(' + deg + 'deg)';
+      if(hour < OPEN){
+        if(readout) readout.textContent = 'BEFORE OPEN';
+        if(title) title.textContent = "We open at 7:30am.";
+        if(desc) desc.textContent = "Come back in the morning. The coffee will be ready.";
+        return;
+      }
+      if(hour >= CLOSE){
+        if(readout) readout.textContent = 'AFTER CLOSE';
+        if(title) title.textContent = "We're closed for the day.";
+        if(desc) desc.textContent = "Back open tomorrow at 7:30am, Monday to Friday.";
+        return;
+      }
       var p = pairingFor(hour);
       if(readout) readout.textContent = p.hour;
       if(title) title.textContent = p.title;
@@ -281,8 +302,20 @@
     window.addEventListener('touchmove', move, { passive:false });
     window.addEventListener('touchend', end);
 
-    // init at current-ish hour
-    var now = new Date().getHours();
+    // init at the current hour in the cafe's own timezone (America/Vancouver)
+    function vancouverHour(){
+      try{
+        var parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Vancouver', hour: 'numeric', minute: 'numeric', hour12: false
+        }).formatToParts(new Date());
+        var h = parseInt(parts.find(function(p){ return p.type === 'hour'; }).value, 10);
+        var m = parseInt(parts.find(function(p){ return p.type === 'minute'; }).value, 10);
+        return h + m / 60;
+      } catch(e){
+        return new Date().getHours();
+      }
+    }
+    var now = vancouverHour();
     setHour(now >= 7 && now < 19 ? now : 9);
   })();
 

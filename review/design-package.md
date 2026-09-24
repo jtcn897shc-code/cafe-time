@@ -99,19 +99,19 @@ CTA: "Order online and start earning"
 Eyebrow: PICK YOUR HOUR
 Heading: "Drag the hand. We'll tell you what to order."
 Sub: "Every hour of the day has a drink and a bite that fits it."
-Time buckets and pairings (drive the JS):
-- 7-10: "Morning coffee + a fresh sandwich." "Start the day the way regulars do."
-- 10-13: "Iced matcha + a salad." "Bright, cold, and enough to carry you to lunch."
-- 13-16: "Hot tea + a slice of cake." "The slow-down hour. Take the window seat."
-- 16-19: "Cold drink + a bowl of soup." "Warm inside, cool in hand. Perfect trade."
-Footer line under the widget: "Whatever the hour, order online and it'll be ready."
+Time buckets and pairings (drive the JS), clamped to real opening hours (Mon to Fri, 7:30am to 4:30pm):
+- 7:30-9:30: "Morning coffee + a fresh sandwich." "Start the day the way regulars do."
+- 9:30-11:30: "Iced matcha + a salad." "Bright, cold, and enough to carry you to lunch."
+- 11:30-2: "Hot tea + a bowl of soup." "The slow-down hour. Take the window seat."
+- 2-4:30: "Cold drink + a slice of cake." "Warm inside, cool in hand. Perfect trade."
+- Before 7:30am: "We open at 7:30am." / After 4:30pm: "We're closed for the day."
+Footer line under the widget: "Open Mon to Fri, 7:30am to 4:30pm. Order online and it'll be ready."
 
 ### 7. Visit
 Eyebrow: FIND US
 Heading: "Come sit with us."
 Address: "#102 - 32315 South Fraser Way, Abbotsford, BC"
-<!-- TODO hours -->
-Hours: see online ordering.
+Hours: "Mon to Fri, 7:30am to 4:30pm. Closed weekends."
 Line: "Natural light, comfortable tables, and a space that's actually easy to unwind in with family and friends."
 CTA: "Get directions" -> Google Maps link for the address.
 
