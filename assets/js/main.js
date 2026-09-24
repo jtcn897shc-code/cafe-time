@@ -152,7 +152,7 @@
     function staticFallback(){
       var img = document.createElement('img');
       img.src = 'assets/img/hero-end.jpg';
-      img.alt = 'Iced matcha at Cafe Time';
+      img.alt = 'Iced matcha poured over ice on a green marble counter';
       mediaWrap.appendChild(img);
       if(loading) loading.classList.add('hidden');
     }

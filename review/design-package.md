@@ -134,11 +134,13 @@ Plain, short, warm, a little proud. Built from Phase 3 findings: cozy, natural l
 - interior.jpg: real interior photo (cropped from promo3.webp)
 - storefront.jpg: real storefront photo (cropped from promo3.webp)
 - food-*.jpg x8: real kitchen photos cropped individually out of foodGallery2.webp (coffee, hottea, sandwich, salad, colddrinks, rice, cake, soup)
-- hero-end.jpg: stock barista-handoff photo (hero.webp from CDN), used TEMPORARILY as the static hero end-frame stand-in until a real scroll video is generated. Flagged in code comments.
+- still-sourcing.webp: AI flat-lay (coffee beans, matcha whisk and bowl, loose tea, sourdough) on green marble, used in the sourcing strip
+- still-rewards.webp: AI iced matcha + hot cup on green marble, used in the rewards section
+- hero.mp4 / hero-poster.jpg / hero-end.jpg: the approved AI hero video (the pour), scrub-encoded, with real poster and end frames pulled from it
 
-## Hero engineering hook (for Phase 8 build)
-No credits were spent and no video exists. The hero is architected to receive one later:
-- Expected file: `assets/hero.mp4` (scrub-encoded, short GOP, no audio, faststart)
-- Poster/loading frame: `assets/hero-poster.jpg` (first frame stand-in; currently reuses hero-end.jpg)
-- End frame / static fallback: `assets/hero-end.jpg` (currently the real stock barista photo, swap for the true last frame once the video is generated)
+## Hero engineering (Phase 8 build, now live)
+The approved hero video shipped:
+- `assets/hero.mp4`: scrub re-encode, cropped ~120px off the top (120/720 = 16.7%) to remove a copper pitcher edge visible in the first ~1s, scaled back to 1280x720, light unsharp (5:5:0.6), libx264, -g 2, no audio, faststart, ~3.6MB, 6.04s.
+- `assets/hero-poster.jpg`: first frame of the encoded video (loading/poster state).
+- `assets/hero-end.jpg`: rested final frame (~5.9s), used as the static hero on phones, reduced motion, save-data, file:// protocol, and as the fetch-failure fallback.
 - JS fetches `assets/hero.mp4` as a Blob; on any failure, on width < 768, prefers-reduced-motion, saveData, or file:// protocol, it shows the static `hero-end.jpg` fallback instead and skips all video wiring.
