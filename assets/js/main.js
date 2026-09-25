@@ -42,6 +42,26 @@
     revealEls.forEach(function(el){ el.classList.add('in'); });
   }
 
+  /* ---------------- menu filter pills ---------------- */
+  var pillGroup = document.querySelector('.menu-pills');
+  if(pillGroup){
+    var pills = Array.from(pillGroup.querySelectorAll('.pill'));
+    var menuCards = Array.from(document.querySelectorAll('.menu-card'));
+    pillGroup.hidden = false;
+    pillGroup.addEventListener('click', function(e){
+      var pill = e.target.closest('.pill');
+      if(!pill) return;
+      var filter = pill.getAttribute('data-filter');
+      pills.forEach(function(p){ p.setAttribute('aria-pressed', p === pill ? 'true' : 'false'); });
+      menuCards.forEach(function(card){
+        var show = filter === 'all' || card.getAttribute('data-cat') === filter;
+        // cards already revealed; mark them so @starting-style fades them back in
+        card.classList.add('is-filtered', 'in');
+        card.hidden = !show;
+      });
+    });
+  }
+
   /* ---------------- signature ring (draws on scroll, hand marks time-of-day sections) ---------------- */
   var ring = document.querySelector('.signature-ring');
   if(ring){
