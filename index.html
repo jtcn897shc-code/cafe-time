@@ -8,8 +8,9 @@
 <link rel="icon" href="assets/img/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,18 +77,17 @@
   <section class="hero-scroll" data-hour="7" aria-label="Cafe Time hero">
     <div class="hero-sticky">
       <div class="hero-media">
-        <!-- video (if assets/hero.mp4 exists) or static fallback is injected here by JS -->
+        <!-- video or static fallback is injected here by JS -->
+        <noscript><img src="assets/img/hero-end.jpg" alt="Iced matcha over ice on a green marble counter"></noscript>
       </div>
       <div class="hero-loading"><div class="ring"></div></div>
 
       <div class="hero-content">
         <div class="wrap">
           <div class="hero-band active" data-start="0" data-end="0.34">
-            <span class="eyebrow">Time for matcha</span>
-            <h1>Time for something green.</h1>
+            <h1>Time for something <em>green.</em></h1>
           </div>
           <div class="hero-band" data-start="0.34" data-end="0.68">
-            <span class="eyebrow">Whisked, not shaken</span>
             <h1>Whisked fresh.<br>Poured over ice.</h1>
             <p class="sub">your matcha, your hour.</p>
           </div>
@@ -117,8 +117,7 @@
   <section id="day" data-hour="9">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">A cafe for every hour</span>
-        <h2>Your day, on time.</h2>
+        <h2 class="lockup">Your day,<em>on time.</em></h2>
         <p class="lede">Three moments. One good cup each.</p>
       </div>
       <div class="day-grid stagger">
@@ -157,19 +156,82 @@
   <section id="menu" class="menu-section" data-hour="12">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">The spread</span>
-        <h2>Everything, at a glance.</h2>
+        <h2 class="lockup">The menu<em>at a glance.</em></h2>
         <p class="lede">The full menu and every swap live in ordering. Here's what's coming out of the kitchen.</p>
       </div>
+      <div class="menu-pills" role="group" aria-label="Filter the menu" hidden>
+        <button type="button" class="pill" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="pill" data-filter="coffee" aria-pressed="false">Coffee</button>
+        <button type="button" class="pill" data-filter="tea" aria-pressed="false">Tea</button>
+        <button type="button" class="pill" data-filter="cold" aria-pressed="false">Cold drinks</button>
+        <button type="button" class="pill" data-filter="food" aria-pressed="false">Food</button>
+        <button type="button" class="pill" data-filter="sweets" aria-pressed="false">Sweets</button>
+      </div>
       <div class="menu-grid stagger">
-        <div class="menu-card reveal" style="--i:0"><span class="num">01</span><img src="assets/img/food-coffee.jpg" alt="Coffee"><div class="label"><div class="name">Coffee</div><div class="line">Smooth, rich, pulled by people who care about it.</div></div></div>
-        <div class="menu-card reveal" style="--i:1"><span class="num">02</span><img src="assets/img/food-hottea.jpg" alt="Hot tea"><div class="label"><div class="name">Hot tea</div><div class="line">Organic leaves, steeped properly, jar by jar.</div></div></div>
-        <div class="menu-card reveal" style="--i:2"><span class="num">03</span><img src="assets/img/food-sandwich.jpg" alt="Sandwich"><div class="label"><div class="name">Sandwich</div><div class="line">Pressed hot, stacked full, gone in minutes.</div></div></div>
-        <div class="menu-card reveal" style="--i:3"><span class="num">04</span><img src="assets/img/food-salad.jpg" alt="Salad"><div class="label"><div class="name">Salad</div><div class="line">Crisp and colorful, built to actually fill you up.</div></div></div>
-        <div class="menu-card reveal" style="--i:4"><span class="num">05</span><img src="assets/img/food-colddrinks.jpg" alt="Cold drinks"><div class="label"><div class="name">Cold drinks</div><div class="line">Iced, fruited, the reason summer regulars exist.</div></div></div>
-        <div class="menu-card reveal" style="--i:5"><span class="num">06</span><img src="assets/img/food-rice.jpg" alt="Rice bowl"><div class="label"><div class="name">Rice</div><div class="line">A warm bowl when a sandwich isn't enough.</div></div></div>
-        <div class="menu-card reveal" style="--i:6"><span class="num">07</span><img src="assets/img/food-cake.jpg" alt="Cake"><div class="label"><div class="name">Cake</div><div class="line">Small slices, big finish.</div></div></div>
-        <div class="menu-card reveal" style="--i:7"><span class="num">08</span><img src="assets/img/food-soup.jpg" alt="Soup"><div class="label"><div class="name">Soup</div><div class="line">The bowl people order twice in one week.</div></div></div>
+        <article class="menu-card reveal" data-cat="coffee" style="--i:0">
+          <div class="menu-card-img"><img src="assets/img/food-coffee.jpg" alt="Coffee at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Coffee</h3>
+            <p>Smooth, rich, pulled by people who care about it.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> coffee</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="tea" style="--i:1">
+          <div class="menu-card-img"><img src="assets/img/food-hottea.jpg" alt="Hot tea at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Hot tea</h3>
+            <p>Organic leaves, steeped properly, jar by jar.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> hot tea</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="food" style="--i:2">
+          <div class="menu-card-img"><img src="assets/img/food-sandwich.jpg" alt="Pressed sandwich at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Sandwich</h3>
+            <p>Pressed hot, stacked full, gone in minutes.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> sandwich</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="food" style="--i:3">
+          <div class="menu-card-img"><img src="assets/img/food-salad.jpg" alt="Salad bowl at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Salad</h3>
+            <p>Crisp and colorful, built to actually fill you up.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> salad</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="cold" style="--i:4">
+          <div class="menu-card-img"><img src="assets/img/food-colddrinks.jpg" alt="Iced fruit drinks at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Cold drinks</h3>
+            <p>Iced, fruited, the reason summer regulars exist.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> cold drinks</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="food" style="--i:5">
+          <div class="menu-card-img"><img src="assets/img/food-rice.jpg" alt="Rice bowl at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Rice bowl</h3>
+            <p>A warm bowl when a sandwich isn't enough.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> rice bowl</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="sweets" style="--i:6">
+          <div class="menu-card-img"><img src="assets/img/food-cake.jpg" alt="Sliced cakes at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Cake</h3>
+            <p>Small slices, big finish.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> cake</span></a>
+          </div>
+        </article>
+        <article class="menu-card reveal" data-cat="food" style="--i:7">
+          <div class="menu-card-img"><img src="assets/img/food-soup.jpg" alt="Bowl of soup at Cafe Time" loading="lazy"></div>
+          <div class="menu-card-body">
+            <h3>Soup</h3>
+            <p>The bowl people order twice in one week.</p>
+            <a class="order-pill" href="https://cafetime.ca" target="_blank" rel="noopener">Order<span class="sr-only"> soup</span></a>
+          </div>
+        </article>
       </div>
       <div class="menu-cta reveal">
         <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">See full menu</a>
@@ -183,7 +245,6 @@
       <div class="sourcing-grid">
         <div>
           <div class="section-head reveal" style="margin-bottom:26px;">
-            <span class="eyebrow">Where it comes from</span>
             <h2>We didn't cut corners on where this comes from.</h2>
           </div>
           <div class="sourcing-list stagger">
@@ -209,14 +270,31 @@
     </div>
   </section>
 
+  <!-- FEATURED DRINK -->
+  <section class="featured" data-hour="13" aria-labelledby="featured-title">
+    <div class="wrap featured-grid">
+      <div class="featured-copy reveal">
+        <h2 id="featured-title" class="featured-title">Tiramisu<br>latte<em>dessert, in a glass.</em></h2>
+        <p class="featured-desc">Coffee that tastes like dessert. Reviewers call it incredible, and a few went further than that.</p>
+        <dl class="featured-facts">
+          <div><dt>Sweet</dt><dd>coffee meets dessert</dd></div>
+          <div><dt>Ahead</dt><dd>order online, skip the line</dd></div>
+          <div><dt>Points</dt><dd>every order earns rewards</dd></div>
+        </dl>
+        <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order a tiramisu latte</a>
+      </div>
+      <div class="featured-photo reveal">
+        <img src="assets/img/still-tiramisu.webp" alt="Tiramisu latte in a glass with cocoa-dusted cream on top, next to a ladyfinger" loading="lazy">
+      </div>
+    </div>
+  </section>
+
   <!-- REWARDS -->
   <section id="rewards" class="rewards" data-hour="14">
     <div class="wrap">
       <div class="rewards-row reveal">
-        <div class="rewards-photo"><img src="assets/img/still-rewards.webp" alt="Iced matcha next to a hot coffee on green marble"></div>
         <div class="rewards-copy">
-          <span class="eyebrow">Loyalty, built in</span>
-          <h2>Earn points every order.</h2>
+          <h2>Earn points <em>every order.</em></h2>
           <p>Order online and every cup and every sandwich earns you rewards toward the next one. No card to carry, no app to dig through, it's already in your account.</p>
           <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online and start earning</a>
         </div>
@@ -228,7 +306,6 @@
   <section class="picker" data-hour="15">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Pick your hour</span>
         <h2>Drag the hand. We'll tell you what to order.</h2>
         <p class="lede">Every hour of the day has a drink and a bite that fits it.</p>
       </div>
@@ -251,12 +328,11 @@
   <section id="visit" class="visit" data-hour="16">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Find us</span>
-        <h2>Come sit with us.</h2>
+        <h2 class="lockup">Come sit<em>with us.</em></h2>
       </div>
       <div class="visit-grid">
         <div class="visit-card reveal">
-          <span class="eyebrow" style="margin-bottom:2px;">Address</span>
+          <span class="field-label">Address</span>
           <div class="addr">#102 - 32315 South Fraser Way<br>Abbotsford, BC</div>
           <div class="hours-note">Mon to Fri, 7:30am to 4:30pm.<br>Closed weekends.</div>
           <p class="desc">Natural light, comfortable tables, and a space that's actually easy to unwind in with family and friends.</p>
@@ -273,7 +349,7 @@
   <!-- FINAL CTA -->
   <section class="final-cta" data-hour="17">
     <div class="wrap reveal">
-      <h2>Your table's ready.</h2>
+      <h2>Your table's <em>ready.</em></h2>
       <p>Order online, earn rewards, and we'll have it ready when you walk in.</p>
       <a class="btn" href="https://cafetime.ca" target="_blank" rel="noopener">Order online</a>
     </div>
@@ -293,7 +369,7 @@
       </nav>
     </div>
     <div class="footer-disclosure">
-      Hero imagery is AI generated. Food photos are from our kitchen.<br>
+      Hero and feature imagery is AI generated. Menu photos are from our kitchen.<br>
       Cafe Time, #102 - 32315 South Fraser Way, Abbotsford, BC.
     </div>
   </div>
