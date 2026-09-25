@@ -162,6 +162,7 @@
         if(pct >= 0.98 && band.classList.contains('settle')) active = true;
         band.classList.toggle('active', active);
       });
+      heroScroll.classList.toggle('is-settled', pct >= 0.68);
       return pct;
     }
 
@@ -183,64 +184,137 @@
       return;
     }
 
-    var video = document.createElement('video');
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-    video.poster = 'assets/img/hero-poster.jpg';
+    function heroPct(){ return showBandsByScroll(); }
 
-    fetch('assets/hero.mp4')
-      .then(function(res){
-        if(!res.ok) throw new Error('no video');
-        return res.blob();
-      })
-      .then(function(blob){
-        var url = URL.createObjectURL(blob);
-        video.src = url;
-        mediaWrap.appendChild(video);
+    // Phones and portrait screens scrub a stack of still frames on a canvas.
+    // iOS Safari often won't paint seeked frames of a video that never played,
+    // so frames are the reliable path there (same technique as Apple's product pages).
+    var useFrames = window.matchMedia('(max-width: 767px), (max-aspect-ratio: 1/1)').matches;
+    if(useFrames){ frameScrub(); } else { videoScrub(); }
 
-        video.addEventListener('error', function(){
-          // decode failed on this browser/build even though the fetch succeeded
-          video.remove();
+    function frameScrub(){
+      var COUNT = 145, FOCAL_X = 0.7;
+      var canvas = document.createElement('canvas');
+      canvas.setAttribute('aria-hidden', 'true');
+      mediaWrap.appendChild(canvas);
+      var ctx = canvas.getContext('2d');
+      var frames = new Array(COUNT);
+      var dirty = true, lastDrawn = -1, failed = false;
+
+      function src(i){ return 'assets/frames/f_' + String(i + 1).padStart(3, '0') + '.webp'; }
+      function load(i){
+        if(frames[i]) return;
+        var img = new Image();
+        img.decoding = 'async';
+        img.onload = function(){ img.ready = true; dirty = true; if(i === 0 && loading) loading.classList.add('hidden'); };
+        img.onerror = function(){ if(i === 0 && !failed){ failed = true; canvas.remove(); staticFallback(); } };
+        img.src = src(i);
+        frames[i] = img;
+      }
+      // coarse pass first so an early scrub already moves, then fill in the gaps
+      [16, 8, 4, 2, 1].forEach(function(step){ for(var i = 0; i < COUNT; i += step) load(i); });
+      load(COUNT - 1);
+
+      function size(){
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(canvas.clientWidth * dpr);
+        canvas.height = Math.round(canvas.clientHeight * dpr);
+        dirty = true;
+      }
+      window.addEventListener('resize', size);
+      size();
+
+      function nearestReady(i){
+        for(var d = 0; d < COUNT; d++){
+          if(frames[i - d] && frames[i - d].ready) return i - d;
+          if(frames[i + d] && frames[i + d].ready) return i + d;
+        }
+        return -1;
+      }
+      function draw(i){
+        var img = frames[i];
+        var cw = canvas.width, ch = canvas.height, iw = img.naturalWidth, ih = img.naturalHeight;
+        var s = Math.max(cw / iw, ch / ih);
+        var w = iw * s, h = ih * s;
+        ctx.drawImage(img, (cw - w) * FOCAL_X, (ch - h) * 0.5, w, h);
+      }
+
+      var displayed = 0;
+      function loop(){
+        if(failed) return;
+        var target = heroPct() * (COUNT - 1);
+        displayed += (target - displayed) * 0.18;
+        var idx = nearestReady(Math.round(displayed));
+        if(idx >= 0 && (idx !== lastDrawn || dirty)){ draw(idx); lastDrawn = idx; dirty = false; }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    function videoScrub(){
+      var video = document.createElement('video');
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.preload = 'auto';
+      video.poster = 'assets/img/hero-poster.jpg';
+
+      fetch('assets/hero.mp4')
+        .then(function(res){
+          if(!res.ok) throw new Error('no video');
+          return res.blob();
+        })
+        .then(function(blob){
+          video.src = URL.createObjectURL(blob);
+          mediaWrap.appendChild(video);
+
+          video.addEventListener('error', function(){
+            // decode failed on this browser/build even though the fetch succeeded
+            video.remove();
+            staticFallback();
+            window.addEventListener('scroll', showBandsByScroll, { passive:true });
+            showBandsByScroll();
+          });
+
+          var seeking = false, seekStarted = 0, targetTime = 0, duration = 0, displayed = 0;
+
+          // only start seeking once frames are decodable; a seek issued earlier can
+          // swallow its 'seeked' event and leave the loop waiting forever
+          video.addEventListener('loadeddata', function(){
+            duration = video.duration || 6;
+            if(loading) loading.classList.add('hidden');
+            // Safari paints seeks reliably only after the element has played once
+            var p = video.play();
+            if(p && p.then) p.then(function(){ video.pause(); }).catch(function(){});
+            requestAnimationFrame(seekLoop);
+            requestAnimationFrame(rafLoop);
+          }, { once:true });
+
+          video.addEventListener('seeked', function(){ seeking = false; });
+
+          function seekLoop(){
+            var now = performance.now();
+            if(seeking && now - seekStarted > 400) seeking = false; // never wait on a lost event
+            if(!seeking && Math.abs(video.currentTime - targetTime) > 0.02){
+              seeking = true;
+              seekStarted = now;
+              video.currentTime = targetTime;
+            }
+            requestAnimationFrame(seekLoop);
+          }
+          function rafLoop(){
+            var raw = heroPct() * duration;
+            displayed += (raw - displayed) * 0.14;
+            targetTime = Math.min(Math.max(displayed, 0), duration - 0.05);
+            requestAnimationFrame(rafLoop);
+          }
+        })
+        .catch(function(){
           staticFallback();
           window.addEventListener('scroll', showBandsByScroll, { passive:true });
           showBandsByScroll();
         });
-
-        var seeking = false;
-        var targetTime = 0;
-        var duration = 0;
-
-        video.addEventListener('loadedmetadata', function(){
-          duration = video.duration || 6;
-          if(loading) loading.classList.add('hidden');
-        });
-
-        function seekLoop(){
-          if(!seeking && Math.abs(video.currentTime - targetTime) > 0.02){
-            seeking = true;
-            video.currentTime = targetTime;
-          }
-          requestAnimationFrame(seekLoop);
-        }
-        video.addEventListener('seeked', function(){ seeking = false; });
-        requestAnimationFrame(seekLoop);
-
-        var displayed = 0;
-        function rafLoop(){
-          var pct = showBandsByScroll();
-          var raw = pct * duration;
-          displayed += (raw - displayed) * 0.14;
-          targetTime = Math.min(Math.max(displayed, 0), duration - 0.05);
-          requestAnimationFrame(rafLoop);
-        }
-        requestAnimationFrame(rafLoop);
-      })
-      .catch(function(){
-        staticFallback();
-        window.addEventListener('scroll', showBandsByScroll, { passive:true });
-        showBandsByScroll();
-      });
+    }
   })();
 
   /* ---------------- interactive clock drink-picker ---------------- */
@@ -255,7 +329,7 @@
     var OPEN = 7.5, CLOSE = 16.5;
     var pairings = [
       { from: 7.5, to: 9.5, hour: '7:30-9:30AM', title: 'Morning coffee + a fresh sandwich.', desc: 'Start the day the way regulars do.' },
-      { from: 9.5, to: 11.5, hour: '9:30-11:30AM', title: 'Iced matcha + a salad.', desc: 'Bright, cold, and enough to carry you to lunch.' },
+      { from: 9.5, to: 11.5, hour: '9:30-11:30AM', title: 'A latte + a salad.', desc: 'Bright, fresh, and enough to carry you to lunch.' },
       { from: 11.5, to: 14, hour: '11:30-2PM', title: 'Hot tea + a bowl of soup.', desc: 'The slow-down hour. Take the window seat.' },
       { from: 14, to: 16.5, hour: '2-4:30PM', title: 'Cold drink + a slice of cake.', desc: 'Warm inside, cool in hand. Perfect trade.' }
     ];

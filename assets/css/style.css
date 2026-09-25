@@ -196,7 +196,7 @@ h1 em, h2 em, h3 em{
   width:100%; height:100%;
   overflow:hidden;
 }
-.hero-media video, .hero-media img{
+.hero-media video, .hero-media img, .hero-media canvas{
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit: cover;
@@ -215,6 +215,15 @@ h1 em, h2 em, h3 em{
   .hero-media::after{
     background: linear-gradient(180deg, rgba(18,20,18,0.35) 0%, rgba(18,20,18,0.25) 38%, rgba(18,20,18,0.82) 62%, rgba(18,20,18,0.94) 100%);
   }
+}
+@media (max-width: 767px){
+  /* the settle block sits over the glass on phones; deepen the scrim so it reads */
+  .hero-media::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background: rgba(18,20,18,0.62);
+    opacity:0; transition: opacity .5s var(--ease);
+  }
+  .hero-scroll.is-settled .hero-media::before{ opacity:1; }
 }
 .hero-loading{
   position:absolute; inset:0;
