@@ -28,7 +28,7 @@ Display size caps at 6rem.
 | `--matcha` | #7DBA3C | Accent text on ink only |
 | `--green` | #22AA3A | Logo green. **Fill and decoration only, never text on cream** (2.66:1 fails) |
 | `--deep-green` | #145C24 | Accent text on cream and blush, rewards band ground |
-| `--blush` | #F2D6CF | Featured drink band ground |
+| `--blush` | #F2D6CF | Featured drink band ground (tiramisu latte) |
 | `--tangerine` | #FF5A1F | Primary buttons (ink text), final CTA band. Rare. |
 
 | Pair | Ratio | Verdict |
