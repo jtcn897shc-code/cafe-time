@@ -4,6 +4,9 @@
 Web search across Google-indexed review aggregators, Yelp listings, Tripadvisor, Uber Eats, Instagram, and local Abbotsford "best cafe" round-ups. Cafe Time itself has a thin public review footprint (small independent shop), so findings blend direct mentions of Cafe Time with the recurring language Abbotsford cafe-goers use generally. Treated as buyer-voice input for copy, not as verbatim quotes to publish.
 
 ## Direct Cafe Time mentions
+
+> **Correction (owner review):** these lines are NOT verified as Cafe Time reviews. The owner confirmed Cafe Time does not sell a tiramisu latte or matcha, and one listed source (yelp.ca/biz/city-cafe-abbotsford) is a different cafe. Do not quote or paraphrase any line below as a customer review on the site.
+
 - "Breakfast sandwiches and Korean rice bowls are seriously amazing"
 - "Specialty coffees are the best in Abbotsford"
 - Tiramisu latte called "incredible" / "god-tier"
