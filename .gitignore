@@ -1,0 +1,6 @@
+review/raw/
+review/shots/
+review/frames/
+review/*.png
+review/*.mp4
+node_modules/
