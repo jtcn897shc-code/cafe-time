@@ -145,7 +145,6 @@
       return pct;
     }
 
-    var isSmall = window.matchMedia('(max-width: 767px)').matches;
     var saveData = (navigator.connection && navigator.connection.saveData) || false;
     var isFile = window.location.protocol === 'file:';
 
@@ -157,7 +156,7 @@
       if(loading) loading.classList.add('hidden');
     }
 
-    if(reduceMotion || isSmall || saveData || isFile){
+    if(reduceMotion || saveData || isFile){
       staticFallback();
       window.addEventListener('scroll', showBandsByScroll, { passive:true });
       showBandsByScroll();
