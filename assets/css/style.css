@@ -558,3 +558,18 @@ footer{ background: var(--ink); color: var(--cream-soft); padding: 56px 0 30px; 
 .btn:focus-visible, .pill:focus-visible, .order-pill:focus-visible{ border-radius: 999px; }
 html{ scrollbar-color: var(--green) var(--ink); }
 .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* ---------- film grain (owner-requested texture) ----------
+   A real noise tile, not an SVG filter: fixed over the whole page,
+   even on both the dark and the light sections,
+   and too faint to touch text contrast. Never intercepts clicks. */
+body::after{
+  content:"";
+  position: fixed;
+  inset: -50%;
+  z-index: 70;
+  pointer-events: none;
+  background: url("../img/grain.png") repeat;
+  background-size: 180px 180px;
+  opacity: .05; /* plain blend: overlay all but vanished on the dark sections */
+}

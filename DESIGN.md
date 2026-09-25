@@ -49,6 +49,10 @@ Display size caps at 6rem.
 - Menu filter: returning cards fade in through `@starting-style` (opacity plus translateY(8px) scale(.97), 220ms, `--ease`). Reduced motion is fade only.
 - Hover effects sit behind `(hover:hover) and (pointer:fine)`.
 
+## Texture
+
+A static film grain covers the whole page (`body::after`, `assets/img/grain.png`, normal blend, 5% opacity, about ±5 brightness levels). It is a real noise tile, not an SVG filter, and it's too faint to change any contrast ratio above. It does not animate, so there's nothing to reduce for reduced motion.
+
 ## Do / Don't (coffee shop clichés to design away from)
 
 - Don't use coffee bean icons, steam squiggles, chalkboard script, kraft paper textures or "Est. 20XX" badges.
